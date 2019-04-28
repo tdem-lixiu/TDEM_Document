@@ -1,10 +1,8 @@
-TDEM课题组文档总结
-------------------
-此项目用于整理TDEM课题组学习文档
-
+# TDEM课题组文档总结
 ****
-参与成员
---------
+此项目用于整理TDEM课题组学习文档
+****
+## 参与成员
 |成员|邮箱|
 |---|---
 |刘文韬|wtliu5369@163.com
@@ -13,5 +11,6 @@ TDEM课题组文档总结
 |杨航|
 |曹华科|496405242@qq.com
 |程旺盛|
-
 ****
+## 文档链接
+* [课题组组会](https://github.com/tdem-lixiu/TDEM_Document/blob/master/GroupMeeting/README.md)
