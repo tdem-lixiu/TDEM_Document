@@ -1,6 +1,8 @@
 Linux简明教程-鲁凯亮
 ====================
 
+[<==](https://github.com/tdem-lixiu/TDEM_Document/blob/master/Summarize/Lukl/README.md)
+
 第一章 MobaXterm的安装
 ----------------------
 
