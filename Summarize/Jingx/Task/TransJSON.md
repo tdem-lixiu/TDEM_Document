@@ -26,3 +26,6 @@ coordinate of receiving points:
 File prefix = Model_1
 Calculate type = ff
 ```
+参考链接：
+[A Fortran 2008 JSON API](https://github.com/jacobwilliams/json-fortran#json-fortran)
+[Example Usage for json-fortran](https://github.com/jacobwilliams/json-fortran/wiki/Example-Usage)
