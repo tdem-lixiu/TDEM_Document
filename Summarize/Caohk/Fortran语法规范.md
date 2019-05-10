@@ -1,5 +1,7 @@
 <h2 align=center> Fortran语法规范 </h2>
+
 #### 一.变量定义 ####
+
 - 1.首先建议通过以下命令取消默认的命名规则：
 ``Implicit none``
 数据类型主要有本质类型和派生类型，其中本质类型有:integer，real，complex，character，logical，这类都能用kind来指定精度，而字符型可以用len指定长度。
