@@ -32,5 +32,98 @@
     - [x] 中间传递过程以``AppRes.json``为载体，最终输出文件可以自动匹配输入文件名
 - 过程文件统一在Fortran动态库中删除
 - 为了适应json文件为接口的全域视电阻率定义程序，相应的一维正演程序也做了调整
-    - [ ] json文件中冗余的key
-    - [ ] json文件标准格式文档说明``(包括正演和全域视电阻率定义程序输入输出)``
+    - [x] json文件中冗余的key
+    - [x] json文件标准格式文档说明``(包括正演和全域视电阻率定义程序输入输出)``
+##### GATEM一维正演输入模型文件JSON格式
+示例文件格式：
+```json
+{
+    "nlayer": 2,
+    "res": [100, 10],
+    "thickness": [200],
+    "nsource": 2,
+    "source": {
+        "source1": [-50, 50, 50, 50],
+        "source2": [50, -50, -50, -50]
+    },
+    "current": 1,
+    "ndipole": 10,
+    "ntime": 100,
+    "trange": [-5, -2],
+    "nrec": 3,
+    "coordrec": {
+        "rec1": [0, 100, 0],
+        "rec2": [0, 100, -10],
+        "rec3": [0, 100, -20]
+    },
+    "prefix": ["Model_1"],
+    "caltype": ["ff"]
+}
+```
+各键代表的参数：
+```bash
+"nlayer": 模型层数，int类型
+"res": 各层电阻率，list类型
+"thickness": 各层厚度，list类型
+"nsource": 源的个数，int类型
+"source": {
+    "source1": 第1个源的坐标，list类型
+    "source2": 第2个源的坐标，list类型
+    ...
+    "sourcei": 第i个源的坐标，list类型
+},
+"current": 电流大小，float类型
+"ndipole": 电偶极子剖分段数，int类型
+"ntime": 时间道数，int类型
+"trange": 计算时间范围，指数，list类型
+"nrec": 接收点个数，int类型
+"coordrec": {
+    "rec1": 第1个接收点的坐标，list类型
+    "rec2": 第2个接收点的坐标，list类型
+    ...
+    "reci": 第i个接收点的坐标，list类型
+},
+"prefix": 输出文件前缀，list类型，注意这里要将字符串放在list中
+"caltype": 计算类型，["ff"]计算场，["df"]计算时间导数，list类型，注意这里要将字符串放在list中
+```
+##### GATEM-AppResShift模块输入文件JSON格式
+```json
+{
+  "nlayer": 2,
+  "res": [
+    100,
+    100
+  ],
+  "thickness": [
+    200
+  ],
+  "nsource": 1,
+  "source": {
+    "source1": [
+        x1, y1, x2, y2(源起止点坐标)
+    ]
+  },
+  "current": 1,
+  "ndipole": 10,
+  "ntime": 100,
+  "trange": [
+    -5,
+    -2
+  ],
+  "caltype": [
+    "ff"
+  ],
+  "coordrec": [
+      x, y, z(接收点坐标)
+  ],
+  "t": [
+      ...(时间道)
+  ],
+  "field": [
+      ...(场值)
+  ],
+  "ModelName": [
+    "Pos1-init--ff-B.json"(输出文件名)
+  ]
+}
+```
