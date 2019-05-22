@@ -1,0 +1,22 @@
+{
+    "nlayer": 2,
+    "res":[100,10],
+    "thickness":[200],
+    "nsource":2,
+    "source":{
+        "source1":[-50,50,50,50],
+        "source2":[50,-50,-50,-50]
+    },
+    "current":1,
+    "ndipole":10,
+    "ntime":100,
+    "trange":[-5,-2],
+    "nrec":3,
+    "coordrec":{
+        "rec1":[0,100,0],
+        "rec2":[0,100,-10],
+        "rec3":[0,100,-20]
+    },
+    "prefix":["Model_1"],
+    "caltype":["ff"]
+}
