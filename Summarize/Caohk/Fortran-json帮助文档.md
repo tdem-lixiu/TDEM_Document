@@ -13,10 +13,14 @@
 
 ##### 
 json%initialize()：初始化，在使用json的子函数前，需要先初始化；
+
 json%load_file(filename='json文件名')：读取json的文件，将文件内容存储在内部函数；
+
 json%print_file()：将读取的文件内容输出到屏幕上；
+
 json%get()：从文件提取信息(数，数组，字符串)；
-json%get('键值名',变量) ：当提取的量为数组型时，变量应该为可分配数组型(Allocatable)，可以不进行分配直接json%get；当提取的量为字符串时，(注意json文件字符串在[]中)，变量为可分配的字符串：character(len=?),allocatable,dimension(:) :: 字符串变量名。 
+
+json%get('键值名',变量) ：当提取的量为数组型时，变量应该为可分配数组型(Allocatable)，可以不进行分配直接json%get；当提取的量为字符串时，(注意json文件字符串在[]中)，变量为可分配的字符串：`character(len=?),allocatable,dimension(:) :: 字符串变量名`。 
 #####
 
 - 5.示例：
