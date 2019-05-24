@@ -8,7 +8,8 @@ program jf_test_8
     real(kind=4),allocatable,dimension(:):: s1,c1,trange
     real(kind=4),allocatable,dimension(:,:):: s,coordrec
     real(kind=4) :: I0,ndipole
-    character(len=20) :: name1,name2
+    character(len=10),allocatable,dimension(:) :: name1,name2
+    logical :: found
     !初始化
     call json%initialize()
     !读取文件
@@ -38,18 +39,16 @@ program jf_test_8
     call json%get('ntime',ntime)
     call json%get('trange',trange)
     call json%get('nrec',nrec)
-    allocate(coordrec(nrec,3))  !因为每个源的坐标是4，这是固定死的
+    allocate(coordrec(nrec,3),c1(3))  !因为每个源的坐标是4，这是固定死的
     do k=1,nrec,1
         write(str,*) k
         str='coordrec.rec'//trim(adjustl(str)) !得到键值
-        call json%get(str,c1)
+        call json%get(coordrec,c1)
         coordrec(k,:)=c1
     enddo
-    !提取文字部分，怎么读取文字部分
-    call json%load_from_string(name1)
-    write(*,*) name1
-
-    pause
-    
+    !提取文字部分，字符串必须为可分配字符串数组，其中获取方式与数组类似
+    call json%get('prefix',name1)
+    call json%get('caltype',name2)
+    pause   
 end program jf_test_8
 
