@@ -1,5 +1,7 @@
 <h2 align=center> Fortran-json帮助文档 </h2>
 
+[返回上一级](Caohk)
+
 #### 一.json的书写 ####
 
 [json书写参考网址](https://www.cnblogs.com/tech-bird/p/3588430.html)
@@ -19,9 +21,7 @@
         12,
         20,
         50
-        ],
-  ...
-  ...
+        ]
 }
 ```
 
@@ -167,6 +167,8 @@ json文件内容如下:
     "caltype":["ff"]
 }
 ```
+
+[参考程序](json文件读取例子)
 
 ----
 
