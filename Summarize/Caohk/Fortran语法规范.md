@@ -152,4 +152,53 @@ deallocate(a)
 - 1.建议输出使用``write``，不要使用``print``。
 
 - 2.通常设计师建议，不要将format集中排列，如此不利于搜寻。最好将format直接放在write之下，或者直接写在write里面。这里建议在非必要情况下，直接写在write里面。
+
+#### 五.示例
+
+```Fortran
+module example_mod
+    implicit none
+    :
+    interface
+        function fun(i) ! i is implicitly
+        integer :: fun ! declared integer.
+        end function fun
+    end interface
+
+    contains
+
+    function jfun(j) ! All data entities must
+        integer :: jfun, j ! be declared explicitly.
+    :
+    end function jfun
+end module example_mod
+
+subroutine sub
+    implicit complex (c)
+    c = (3.0,2.0) ! c is implicitly declared complex
+    :
+    contains
+    
+    subroutine sub1
+        implicit integer (a,c)
+        c = (0.0,0.0) ! c is host associated and of type complex
+        z = 1.0 ! z is implicitly declared real.
+        a = 2 ! a is implicitly declared integer.
+        cc = 1.0 ! cc is implicitly declared integer.
+        :
+    end subroutine sub1
+    subroutine sub2
+        z = 2.0 ! z is implicitly declared real and is
+        ! different from the variable z in sub1.
+        :
+    end subroutine sub2
+    subroutine sub3
+        use example_mod ! Access the integer function fun.
+        q = fun(k) ! q is implicitly declared real and
+        ! k is implicitly declared integer.
+        :
+    end subroutine sub3
+end subroutine sub
+```
+
 [^1]:正在学习完善中......
