@@ -39,11 +39,11 @@ program jf_test_8
     call json%get('ntime',ntime)
     call json%get('trange',trange)
     call json%get('nrec',nrec)
-    allocate(coordrec(nrec,3),c1(3))  !因为每个源的坐标是4，这是固定死的
+    allocate(coordrec(nrec,3))  !因为每个源的坐标是4，这是固定死的
     do k=1,nrec,1
         write(str,*) k
         str='coordrec.rec'//trim(adjustl(str)) !得到键值
-        call json%get(coordrec,c1)
+        call json%get(str,c1)
         coordrec(k,:)=c1
     enddo
     !提取文字部分，字符串必须为可分配字符串数组，其中获取方式与数组类似
