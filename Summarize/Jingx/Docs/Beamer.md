@@ -66,7 +66,7 @@ TeX Live 是 TUG (TeX User Group) 发布并维护的的 TeX 系统，可以称�
 #### 编译Beamer模板文件
 制作PPT时仅需在TeXstudio中打开``Chd_BeamerTemplate.tex``文件进行改写，其中内容我已进行简单说明，包括封面信息、标题、分栏、图片和列表均作出了示例，按照自己的需求更改其内容即可。改写完成后点击工具栏绿色三角按键即可进行构建，``Chd_BeamerTemplate.pdf``为编译后的文件。
 
-**需注意**:编译该文件需设置使用``XeLatex``进行编译，具体设置参考下图：
+**注意**:``.tex``文件名中不能有中文，并且编译该文件需设置使用``XeLatex``进行编译，具体设置参考下图：
 ![image](./../../Imgs/Img_Beamer/Beamer06.jpg)
 
 示例文件内容如下：
