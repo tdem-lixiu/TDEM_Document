@@ -91,7 +91,7 @@ integer(kind=2) :: i
 data (a(i),i=1,4) /1.0,2.0,3.0,4.0/
 ```
 
-- 8.moduel里面的参数建议：首先区分moduel中可外部调用、外部不可调用，对于不可调用的变量或者子程序，应该声明为：``private 变量名或者子程序名``；对于可调用部分，应该声明为：``pubulic 变量名或者子程序名``。例如：
+- 8.module里面的参数建议：首先区分module中可外部调用、外部不可调用，对于不可调用的变量或者子程序，应该声明为：``private 变量名或者子程序名``；对于可调用部分，应该声明为：``pubulic 变量名或者子程序名``。例如：
 
 ```Fortran
 module atem
@@ -103,9 +103,12 @@ integer(kind=2),parameter :: gauleg=100
 contains
 subroutine transform(...)
 ...
+end subroutine transform
+...
+end module atem
 ```
 
-moduel子程序中虚参建议使用Intent声明，对于输入变量，应写成：``类型（kind=...）,形容词,...,Intent(in) :: 变量名``；对于输出变量，应写成：``类型（kind=...）,形容词,...,Intent(out) :: 变量名``；对于既是输入又是输出的变量：``类型（kind=...）,形容词,...,Intent(inout) :: 变量名``，默认类型为：Intent(inout)。示例：
+module子程序中虚参建议使用Intent声明，对于输入变量，应写成：``类型（kind=...）,形容词,...,Intent(in) :: 变量名``；对于输出变量，应写成：``类型（kind=...）,形容词,...,Intent(out) :: 变量名``；对于既是输入又是输出的变量：``类型（kind=...）,形容词,...,Intent(inout) :: 变量名``，默认类型为：Intent(inout)。示例：
 
 ```Fortran
 real(kind=4),Intent(in) :: a     !输入变量
@@ -125,8 +128,8 @@ real(kind=4) :: d                !既是输入又是输出变量
 #### 三.执行格式 ####
 
 - 1.调用数学内部函数时，建议不要在前面加D，C，Q，如dsin，就是不建议的，建议使用sin即可，原因：
-从F90以后，语法新增了Generic Name的用法。即多个接口类似、功能相似的函数有一个通用的名字，而编译器在调用时，会自动根据参数的个数、类型、顺序自动匹配。所以建议在使用这些通用名(sin，cos，tan，sqrt，abs)，不要使用加前缀。
-加前缀的麻烦之处在于：前缀麻烦，影响编程速度；不利于后期维护，后期如果想修改精度会带来巨大的计算量。
+    - 从F90以后，语法新增了Generic Name的用法。即多个接口类似、功能相似的函数有一个通用的名字，而编译器在调用时，会自动根据参数的个数、类型、顺序自动匹配。所以建议在使用这些通用名(sin，cos，tan，sqrt，abs)，不要使用加前缀。
+    - 加前缀的麻烦之处在于：前缀麻烦，影响编程速度；不利于后期维护，后期如果想修改精度会带来巨大的计算量。
 
 - 2.不建议使用goto语句。
 
@@ -149,4 +152,53 @@ deallocate(a)
 - 1.建议输出使用``write``，不要使用``print``。
 
 - 2.通常设计师建议，不要将format集中排列，如此不利于搜寻。最好将format直接放在write之下，或者直接写在write里面。这里建议在非必要情况下，直接写在write里面。
+
+#### 五.示例
+
+```Fortran
+module example_mod
+    implicit none
+    :
+    interface
+        function fun(i) ! i is implicitly
+        integer :: fun ! declared integer.
+        end function fun
+    end interface
+
+    contains
+
+    function jfun(j) ! All data entities must
+        integer :: jfun, j ! be declared explicitly.
+    :
+    end function jfun
+end module example_mod
+
+subroutine sub
+    implicit complex (c)
+    c = (3.0,2.0) ! c is implicitly declared complex
+    :
+    contains
+    
+    subroutine sub1
+        implicit integer (a,c)
+        c = (0.0,0.0) ! c is host associated and of type complex
+        z = 1.0 ! z is implicitly declared real.
+        a = 2 ! a is implicitly declared integer.
+        cc = 1.0 ! cc is implicitly declared integer.
+        :
+    end subroutine sub1
+    subroutine sub2
+        z = 2.0 ! z is implicitly declared real and is
+        ! different from the variable z in sub1.
+        :
+    end subroutine sub2
+    subroutine sub3
+        use example_mod ! Access the integer function fun.
+        q = fun(k) ! q is implicitly declared real and
+        ! k is implicitly declared integer.
+        :
+    end subroutine sub3
+end subroutine sub
+```
+
 [^1]:正在学习完善中......
